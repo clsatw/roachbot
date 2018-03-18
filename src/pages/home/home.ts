@@ -18,7 +18,7 @@ export class HomePage {
   msg: string;
   aRestApiKey = '1obqzch8x3e7e626';
   device_id = 'clsa0916';
-  @ViewChild('btnL') btnL: any;
+  @ViewChild('btnL') btnL: ElementRef;
   @ViewChild('btnR') btnR: any;
   @ViewChild('btnForward') btnF: any;
   @ViewChild('btnBackward') btnB: any;
@@ -29,8 +29,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log('oninit');
-    console.log('ionViewDidLoad ControlPage');
+    console.log('ionViewDidLoad');
 
     let btn = document.querySelector('#btnForward');
     const btnF$ = Observable.fromEvent(btn, 'click').mapTo('forward');
