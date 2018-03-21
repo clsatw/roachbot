@@ -14,7 +14,7 @@
 
         </ion-col>
         <ion-col col-1>
-          <button id='btnForward' ion-button large color='danger' [clear]="msg==='forward'">
+          <button id='btnForward' ion-button block large color='primary' [clear]="msg==='forward'">
             <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
           </button>
         </ion-col>
@@ -23,19 +23,19 @@
       </ion-row>
       <ion-row>
         <ion-col col-1>
-          <button id='btnL' ion-button large color='default' [clear]="msg==='left'">
+          <button id='btnL' ion-button block large color='secondary' [clear]="msg==='left'">
             <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
           </button>
         </ion-col>
         <ion-col col-1>
-          <!--
-          <button id='btnStop' ion-button round large color='secondary' [clear]="msg==='stop'">
-            <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+          
+          <button id='btnStop' ion-button round block large color='light' [clear]="msg==='stop'">
+              <ion-icon name="car"></ion-icon>
           </button>
-        -->
+       
         </ion-col>
         <ion-col col-1>
-          <button id='btnR' ion-button large color='default' [clear]="msg==='right'">
+          <button id='btnR' ion-button block large color='secondary' [clear]="msg==='right'">
             <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
           </button>
         </ion-col>
@@ -43,8 +43,8 @@
       <ion-row>
         <ion-col col-1>
         </ion-col>
-        <ion-col col-auto>
-          <button id='btnBackward' ion-button large color='danger' [clear]="msg==='backward'">
+        <ion-col col-1>
+          <button id='btnBackward' ion-button block large color='primary' [clear]="msg==='backward'">
             <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
           </button>
         </ion-col>
