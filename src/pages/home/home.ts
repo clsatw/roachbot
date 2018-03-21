@@ -45,17 +45,19 @@ export class HomePage {
     btn = document.querySelector('#btnR');
     const btnR$ = Observable.fromEvent(btn, 'mousedown').mapTo('right');
 
-    btn = document.querySelector('#btnStop');
-    const btnS$ = Observable.fromEvent(btn, 'mousedown').mapTo('stop');
+    //btn = document.querySelector('#btnStop');
+    //const btnS$ = Observable.fromEvent(btn, 'mousedown').mapTo('stop');
 
     // const btnTvOff$ = Observable.fromEvent(this.btnCtrls[1].nativeElement, 'mousedown').mapTo('0');
-    Observable.merge(btnF$, btnB$, btnL$, btnR$, btnS$)
+    Observable.merge(btnF$, btnB$, btnL$, btnR$)
       .throttleTime(500)
-      .distinctUntilChanged()
+      //.distinctUntilChanged()
       // .do(e => console.log(e))
-      .switchMap(e => this.ctrlGpio(e).takeUntil(mouseUp$).do(()=>this.ctrlGpio('stop')))
+      .switchMap(e => this.ctrlGpio(e))
       // .switchMap(e => this.http.get(`https://cloud.arest.io/${this.device_id}/${e}`))
       .subscribe(console.log);
+
+    mouseUp$.switchMap(()=>this.ctrlGpio('stop')).subscribe();  
   }
 
 
