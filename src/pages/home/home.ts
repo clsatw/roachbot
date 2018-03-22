@@ -18,37 +18,40 @@ export class HomePage {
   msg: string;
   aRestApiKey = '1obqzch8x3e7e626';
   device_id = 'clsa0916';
+  @ViewChild('target') target;
   @ViewChild('btnL') btnL: ElementRef;
   @ViewChild('btnR') btnR: any;
-  @ViewChild('btnForward') btnF: any;
-  @ViewChild('btnBackward') btnB: any;
-  @ViewChild('btnStop') btnS: any;
+  @ViewChild('btnF') btnF: any;
+  @ViewChild('btnB') btnB: any;
+  // @ViewChild('btnStop') btnS: any;
   // baseUrl: string = 'https://cloud.arest.io/clsa0916/';
-  constructor(private element: ElementRef, private http: Http, public navCtrl: NavController) {
+  constructor(private http: Http, public navCtrl: NavController) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad');
+    console.log(this.btnF);
 
-    const mouseUp$ = Observable.fromEvent(document, 'mouseup');
-    const touchEnds$ = Observable.fromEvent(document, 'touchend');
+    //let btn = document.querySelector('#target');
+    const mouseUp$ = Observable.fromEvent(this.target.nativeElement, 'mouseup');
+    const touchEnds$ = Observable.fromEvent(this.target.nativeElement, 'touchend');
 
-    let btn = document.querySelector('#btnForward');
-    const btnF$ = Observable.fromEvent(btn, 'mousedown').mapTo('forward');
-    const touchF$ = Observable.fromEvent(btn, 'touchstart').mapTo('forward');
+    //btn = document.querySelector('#btnForward');
+    const btnF$ = Observable.fromEvent(this.btnF.nativeElement, 'mousedown').mapTo('forward');
+    const touchF$ = Observable.fromEvent(this.btnF.nativeElement, 'touchstart').mapTo('forward');
 
-    btn = document.querySelector('#btnBackward');
-    const btnB$ = Observable.fromEvent(btn, 'mousedown').mapTo('backward');
-    const touchB$ = Observable.fromEvent(btn, 'touchstart').mapTo('backward');
+    //btn = document.querySelector('#btnBackward');
+    const btnB$ = Observable.fromEvent(this.btnB.nativeElement, 'mousedown').mapTo('backward');
+    const touchB$ = Observable.fromEvent(this.btnB.nativeElement, 'touchstart').mapTo('backward');
 
-    btn = document.querySelector('#btnL');
-    const btnL$ = Observable.fromEvent(btn, 'mousedown').mapTo('left');
-    const touchL$ = Observable.fromEvent(btn, 'touchstart').mapTo('left');
+    //btn = document.querySelector('#btnL');
+    const btnL$ = Observable.fromEvent(this.btnL.nativeElement, 'mousedown').mapTo('left');
+    const touchL$ = Observable.fromEvent(this.btnL.nativeElement, 'touchstart').mapTo('left');
 
-    btn = document.querySelector('#btnR');
-    const btnR$ = Observable.fromEvent(btn, 'mousedown').mapTo('right');
-    const touchR$ = Observable.fromEvent(btn, 'touchstart').mapTo('right');
+    //btn = document.querySelector('#btnR');
+    const btnR$ = Observable.fromEvent(this.btnR.nativeElement, 'mousedown').mapTo('right');
+    const touchR$ = Observable.fromEvent(this.btnR.nativeElement, 'touchstart').mapTo('right');
 
     //btn = document.querySelector('#btnStop');
     //const btnS$ = Observable.fromEvent(btn, 'mousedown').mapTo('stop');
@@ -64,26 +67,6 @@ export class HomePage {
 
     Observable.merge(mouseUp$, touchEnds$).switchMap(()=>this.ctrlGpio('stop')).subscribe();  
   }
-
-
-/*
-  ionViewDidLoad() {
-
-    console.log("did load");
-    const btnF$ = Observable.fromEvent(this.btnL, 'mousedown').mapTo('forward');
-    const btnB$ = Observable.fromEvent(this.btnB.nativeElement, 'mousedown').mapTo('backward');
-    const btnL$ = Observable.fromEvent(this.btnL.nativeElement, 'mousedown').mapTo('left');
-    const btnR$ = Observable.fromEvent(this.btnR.nativeElement, 'mousedown').mapTo('right');
-    const btnS$ = Observable.fromEvent(this.btnS.nativeElement, 'mousedown').mapTo('stop');
-    Observable.merge(btnF$, btnB$, btnL$, btnR$, btnS$)
-    .throttleTime(500)
-    .distinctUntilChanged()
-    // .do(e => console.log(e))
-    .switchMap(e => this.ctrlGpio(e))
-    // .switchMap(e => this.http.get(`https://cloud.arest.io/${this.device_id}/${e}`))
-    .subscribe(console.log);
-  }
-*/
 
   ctrlGpio(heading: string) {
     this.msg = heading; // for css

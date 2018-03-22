@@ -1,6 +1,28 @@
 page-home {
   .selected {
     background-color: #CFD8DC !important;
-    color: black;
+    color: black;    
+  }
+  .target{
+    margin: 0 auto;
+    width: 100px;
+  }
+
+  .b{
+    height: 8em;    
+    font-weight: bold;    
+    text-align: center;    
+  }
+
+  #btnF, #btnB{ 
+    background: #33ffbd;
+  }
+  
+  #btnL, #btnR{   
+    background:#ffbd33;
+  }
+
+  #btnS{   
+	  background: #ff5733;
   }
 }
