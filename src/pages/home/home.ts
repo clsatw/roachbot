@@ -17,7 +17,9 @@ import { Http } from '@angular/http';
 export class HomePage {
   msg: string;
   aRestApiKey = '1obqzch8x3e7e626';
-  device_id = 'clsa0916';
+  device_id = '107929';
+  // false: manual mode, true: self driving
+  toggleValue: boolean = false;
   @ViewChild('target') target;
   @ViewChild('btnL') btnL: ElementRef;
   @ViewChild('btnR') btnR: any;
@@ -61,15 +63,16 @@ export class HomePage {
       .throttleTime(500)
       //.distinctUntilChanged()
       // .do(e => console.log(e))
-      .switchMap(e => this.ctrlGpio(e))
+      .switchMap(e => this.callArest(e))
       // .switchMap(e => this.http.get(`https://cloud.arest.io/${this.device_id}/${e}`))
       .subscribe(console.log);
 
-    Observable.merge(mouseUp$, touchEnds$).switchMap(()=>this.ctrlGpio('stop')).subscribe();  
+    Observable.merge(mouseUp$, touchEnds$).switchMap(()=>this.callArest('stop')).subscribe();
   }
 
-  ctrlGpio(heading: string) {
-    this.msg = heading; // for css
-    return this.http.get(`https://pro.arest.io/${this.device_id}/${heading}?key=${this.aRestApiKey}`);
+  callArest(fnName: string) {
+    console.log('fnName: ', fnName);
+    this.msg = fnName; // for css
+    return this.http.get(`https://pro.arest.io/${this.device_id}/${fnName}?key=${this.aRestApiKey}`);
   }
 }

@@ -52,14 +52,9 @@
     </ion-grid>
   </div>
 
-  <ion-list radio-group [(ngModel)]="relationship">
-    <ion-item>
-      <ion-label>Internet Controlled</ion-label>
-      <ion-radio value="friends" checked></ion-radio>
-    </ion-item>   
-    <ion-item>
-      <ion-label>Self Driving</ion-label>
-      <ion-radio value="enemies" [disabled]="isDisabled"></ion-radio>
-    </ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-label>Self Driving</ion-label>
+    <ion-toggle [(ngModel)]="toggleValue" color='danger' (ionChange)='callArest("op").subscribe()'></ion-toggle>
+  </ion-item>
+  {{toggleValue}}
 </ion-content>
