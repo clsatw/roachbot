@@ -20,6 +20,7 @@ export class HomePage {
   device_id = '107929';
   // false: manual mode, true: self driving
   toggleValue: boolean = false;
+  motorSpeed = 180;
   @ViewChild('target') target;
   @ViewChild('btnL') btnL: ElementRef;
   @ViewChild('btnR') btnR: any;
@@ -74,5 +75,10 @@ export class HomePage {
     console.log('fnName: ', fnName);
     this.msg = fnName; // for css
     return this.http.get(`https://pro.arest.io/${this.device_id}/${fnName}?key=${this.aRestApiKey}`);
+  }
+  callArestWithParam(fnName: string, speed: string) {
+    // console.log('speed: ', speed);
+    return this.http.get(`https://pro.arest.io/${this.device_id}/${fnName}?key=${this.aRestApiKey}&params=${speed}`)
+      .subscribe();
   }
 }

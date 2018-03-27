@@ -51,10 +51,23 @@
       </ion-row>
     </ion-grid>
   </div>
+  <ion-list>
+  <ion-list-header>
+    參數設定/Settings <ion-icon large name='settings'></ion-icon>
+  </ion-list-header>
 
   <ion-item>
-    <ion-label>Self Driving</ion-label>
+    <ion-label color='danger'>Self Driving</ion-label>
     <ion-toggle [(ngModel)]="toggleValue" color='danger' (ionChange)='callArest("op").subscribe()'></ion-toggle>
   </ion-item>
-  {{toggleValue}}
+
+  <ion-item>
+    <ion-label color='primary'>Set Motor speed  <ion-icon large name="speedometer"></ion-icon></ion-label>
+    <ion-range min="130" max="255" step='10' snaps='true' color='secondary' [(ngModel)]="motorSpeed" (ionChange)='callArestWithParam("speed", motorSpeed)'>
+      <ion-icon range-left small name="play"></ion-icon>
+      <ion-icon range-right name="fastforward"></ion-icon>
+    </ion-range>
+  </ion-item>
+</ion-list>
+
 </ion-content>
