@@ -32,7 +32,9 @@
           <button ion-button round block large id='btnS' [clear]="msg==='stop'">
             <ion-icon name="car"></ion-icon>
           </button>
-
+          <div *ngIf='toggleValue'>
+            <ion-spinner name='bubbles'></ion-spinner>
+          </div>
         </ion-col>
         <ion-col col-2>
           <div class='b' #btnR id='btnR' [class.selected]="msg==='right'">
@@ -52,22 +54,25 @@
     </ion-grid>
   </div>
   <ion-list>
-  <ion-list-header>
-    參數設定/Settings <ion-icon large name='settings'></ion-icon>
-  </ion-list-header>
+    <ion-list-header>
+      參數設定/Settings
+      <ion-icon large name='settings'></ion-icon>
+    </ion-list-header>
 
-  <ion-item>
-    <ion-label color='danger'>Self Driving</ion-label>
-    <ion-toggle [(ngModel)]="toggleValue" color='danger' (ionChange)='callArest("op").subscribe()'></ion-toggle>
-  </ion-item>
+    <ion-item>
+      <ion-label color='danger'>Self Driving</ion-label>
+      <ion-toggle [(ngModel)]="toggleValue" color='danger' (ionChange)='callArest("op").subscribe()'></ion-toggle>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color='primary'>Set Motor speed  <ion-icon large name="speedometer"></ion-icon></ion-label>
-    <ion-range min="130" max="255" step='10' snaps='true' color='secondary' [(ngModel)]="motorSpeed" (ionChange)='callArestWithParam("speed", motorSpeed)'>
-      <ion-icon range-left small name="play"></ion-icon>
-      <ion-icon range-right name="fastforward"></ion-icon>
-    </ion-range>
-  </ion-item>
-</ion-list>
+    <ion-item>
+      <ion-label color='primary'>Set Motor speed
+        <ion-icon large name="speedometer"></ion-icon>
+      </ion-label>
+      <ion-range min="130" max="255" step='10' snaps='true' color='secondary' [(ngModel)]="motorSpeed" (ionChange)='callArestWithParam("speed", motorSpeed)'>
+        <ion-icon range-left small name="play"></ion-icon>
+        <ion-icon range-right name="fastforward"></ion-icon>
+      </ion-range>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
