@@ -21,6 +21,9 @@ export class HomePage {
   // false: manual mode, true: self driving
   toggleValue: boolean = false;
   motorSpeed = 180;
+  maxDist2Wall = 3; // 3cm
+  delay=20; // dealy btw reading sensors
+
   @ViewChild('target') target;
   @ViewChild('btnL') btnL: ElementRef;
   @ViewChild('btnR') btnR: any;
@@ -68,7 +71,7 @@ export class HomePage {
       // .switchMap(e => this.http.get(`https://cloud.arest.io/${this.device_id}/${e}`))
       .subscribe(console.log);
 
-    Observable.merge(mouseUp$, touchEnds$).switchMap(()=>this.callArest('stop')).subscribe();
+    Observable.merge(mouseUp$, touchEnds$).switchMap(() => this.callArest('stop')).subscribe();
   }
 
   callArest(fnName: string) {
@@ -76,9 +79,9 @@ export class HomePage {
     this.msg = fnName; // for css
     return this.http.get(`https://pro.arest.io/${this.device_id}/${fnName}?key=${this.aRestApiKey}`);
   }
-  callArestWithParam(fnName: string, speed: string) {
+  callArestWithParam(fnName: string, speed: string, maxDist2Wall: string, delay: string) {
     // console.log('speed: ', speed);
-    return this.http.get(`https://pro.arest.io/${this.device_id}/${fnName}?key=${this.aRestApiKey}&params=${speed}`)
-      .subscribe();
+    return this.http.get(`https://pro.arest.io/${this.device_id}/${fnName}?key=${this.aRestApiKey}&params=${speed},${maxDist2Wall},${delay}`)
+      .subscribe(console.dir);
   }
 }
